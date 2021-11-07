@@ -2,7 +2,7 @@ package algorithms;
 
 public class QuickSort implements ISortAlgorithm {
 
-    private long stepDelay = 30;
+    private long passoDelay = 30;
     /**
      * É aqui que esta a magia do Quick Sort. 
      * Encontra o pivo do array
@@ -13,10 +13,10 @@ public class QuickSort implements ISortAlgorithm {
      * @see SortArray
      */
     private int findPivotPoint(SortArray array, int lowIndex, int highIndex) {
-        int pivotValue = array.getValue(highIndex);
+        int pivoValor = array.getValue(highIndex);
         int i = lowIndex - 1;
         for (int j = lowIndex; j <= highIndex - 1; j++) {
-            if (array.getValue(j) <= pivotValue) {
+            if (array.getValue(j) <= pivoValor) {
                 i++;
                 array.muda(i, j, getDelay(), true);
             }
@@ -66,12 +66,12 @@ public class QuickSort implements ISortAlgorithm {
 
     @Override
     public long getDelay() {
-        return stepDelay;
+        return passoDelay;
     }
 
     @Override
     public void setDelay(long delay) {
-        this.stepDelay = delay;
+        this.passoDelay = delay;
     }
 
 }

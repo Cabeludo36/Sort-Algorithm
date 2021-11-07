@@ -2,7 +2,7 @@ package algorithms;
 
 public class InsertionSort implements ISortAlgorithm {
 
-    private long stepDelay = 1;
+    private long passoDelay = 1;
     /**
      * Este método implementa o algoritmo de classificação por inserção,
      * consulte <a href="https://en.wikipedia.org/wiki/Insertion_sort">Insertion_sort</a> para
@@ -35,11 +35,11 @@ public class InsertionSort implements ISortAlgorithm {
 
     @Override
     public long getDelay() {
-        return stepDelay;
+        return passoDelay;
     }
 
     @Override
     public void setDelay(long delay) {
-        this.stepDelay = delay;
+        this.passoDelay = delay;
     }
 }

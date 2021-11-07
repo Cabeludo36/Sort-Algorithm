@@ -43,7 +43,7 @@ public class SortArray extends JPanel {
     private JSpinner spinner;
     private boolean playSounds;
 
-    private int arrayChanges = 0; // * Número de mudanças no array que o algoritmo atual realizou até agora
+    private int arrayMuda = 0; // * Número de mudanças no array que o algoritmo atual realizou até agora
 
     public SortArray(boolean playSounds) {
         setBackground(Color.DARK_GRAY);
@@ -90,7 +90,7 @@ public class SortArray extends JPanel {
             player.makeSound(value);
         }
         if (isStep) 
-            arrayChanges++;
+            arrayMuda++;
     }
 
     public void muda(int firstIndex, int secondIndex, long millisecondDelay, boolean isStep) {
@@ -114,13 +114,13 @@ public class SortArray extends JPanel {
     }
 
     public void shuffle() {
-        arrayChanges = 0;
+        arrayMuda = 0;
         Random rng = new Random();
         for (int i = 0; i < arraySize(); i++) {
-            int swapWithIndex = rng.nextInt(arraySize() - 1);
-            muda(i, swapWithIndex, 5, false);
+            int mudaComIndex = rng.nextInt(arraySize() - 1);
+            muda(i, mudaComIndex, 5, false);
         }
-        arrayChanges = 0;
+        arrayMuda = 0;
     }
 
     public void highlightArray() {
@@ -154,22 +154,22 @@ public class SortArray extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
-        Graphics2D panelGraphics = (Graphics2D) g.create();
+        Graphics2D panelGrafico = (Graphics2D) g.create();
 
 		try
 		{
 			Map<RenderingHints.Key, Object> renderingHints = new HashMap<>();
 			renderingHints.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			panelGraphics.addRenderingHints(renderingHints);
-			panelGraphics.setColor(Color.WHITE);
-			panelGraphics.setFont(new Font("Monospaced", Font.BOLD, 20));
-			panelGraphics.drawString("  Algoritimo Atual: " + algorithmName, 10, 30);
-			panelGraphics.drawString("   Delay de Passos: " + algorithmDelay + "ms", 10, 55);
-			panelGraphics.drawString(" Total de mudanças: " + arrayChanges, 10, 80);
+			panelGrafico.addRenderingHints(renderingHints);
+			panelGrafico.setColor(Color.WHITE);
+			panelGrafico.setFont(new Font("Monospaced", Font.BOLD, 20));
+			panelGrafico.drawString("  Algoritimo Atual: " + algorithmName, 10, 30);
+			panelGrafico.drawString("   Delay de Passos: " + algorithmDelay + "ms", 10, 55);
+			panelGrafico.drawString(" Total de mudanças: " + arrayMuda, 10, 80);
 
-			drawBars(panelGraphics);
+			drawBars(panelGrafico);
 		} finally {
-        	panelGraphics.dispose();
+        	panelGrafico.dispose();
         }
     }
 

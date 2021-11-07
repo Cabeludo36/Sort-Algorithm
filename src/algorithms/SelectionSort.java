@@ -2,7 +2,7 @@ package algorithms;
 
 public class SelectionSort implements ISortAlgorithm {
 
-    private long stepDelay = 120;
+    private long passoDelay = 120;
     /**
      * Este método implementa o algoritmo de classificação de seleção, consulte
      * <a href="https://en.wikipedia.org/wiki/Selection_sort">Selection_sort</a> para entender mais.
@@ -35,11 +35,11 @@ public class SelectionSort implements ISortAlgorithm {
 
     @Override
     public long getDelay() {
-        return stepDelay;
+        return passoDelay;
     }
 
     @Override
     public void setDelay(long delay) {
-        this.stepDelay = delay;
+        this.passoDelay = delay;
     }
 }

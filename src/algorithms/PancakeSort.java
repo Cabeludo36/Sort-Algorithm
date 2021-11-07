@@ -3,7 +3,7 @@ package algorithms;
 import Util.Util;
 
 public class PancakeSort implements ISortAlgorithm {
-    private long stepDelay = 1;
+    private long passoDelay = 1;
     /**
      * O Pancake Sort é o problema matemático 
      * de classificar uma pilha desordenada de panquecas em 
@@ -24,9 +24,9 @@ public class PancakeSort implements ISortAlgorithm {
     @Override
     public void runSort(SortArray array) {
         for (int i = array.arraySize(); i > 1; i--) {
-            int maxValueIndex = Util.findMaxValueIndex(array, i);
-            if (maxValueIndex != i - 1) {
-                flip(array, maxValueIndex);
+            int maxValorIndex = Util.findMaxValueIndex(array, i);
+            if (maxValorIndex != i - 1) {
+                flip(array, maxValorIndex);
                 flip(array, i - 1);
             }
         }
@@ -39,11 +39,11 @@ public class PancakeSort implements ISortAlgorithm {
 
     @Override
     public long getDelay() {
-        return stepDelay;
+        return passoDelay;
     }
 
     @Override
     public void setDelay(long delay) {
-        this.stepDelay = delay;
+        this.passoDelay = delay;
     }
 }

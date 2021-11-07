@@ -77,17 +77,17 @@ public class MergeSort implements ISortAlgorithm {
      * A recursão foi adotada para simplificar
      *
      * @param array Array a ser ordenado 
-     * @param left  Index a esquerda do array
-     * @param right Index a direita do array 
+     * @param esq  Index a esquerda do array
+     * @param dire Index a direita do array 
      * @see SortArray
      */
-    private void mergeSort(SortArray array, int left, int right) {
-        if (left < right) {
-            int middleIndex = (left + right) / 2;
+    private void mergeSort(SortArray array, int esq, int dire) {
+        if (esq < dire) {
+            int meioIndex = (esq + dire) / 2;
 
-            mergeSort(array, left, middleIndex);
-            mergeSort(array, middleIndex + 1, right);
-            merge(array, left, middleIndex, right);
+            mergeSort(array, esq, meioIndex);
+            mergeSort(array, meioIndex + 1, dire);
+            merge(array, esq, meioIndex, dire);
         }
     }
 
@@ -99,9 +99,9 @@ public class MergeSort implements ISortAlgorithm {
      */
     @Override
     public void runSort(SortArray array) {
-        int left = 0;
-        int right = array.arraySize() - 1;
-        mergeSort(array, left, right);
+        int esq = 0;
+        int dire = array.arraySize() - 1;
+        mergeSort(array, esq, dire);
     }
 
     @Override

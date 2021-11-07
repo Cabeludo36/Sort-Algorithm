@@ -79,14 +79,14 @@ public final class MainMenuScreen extends Screen {
         addCheckBox(new RadixSort(),        sortAlgorithmContainer);
         addCheckBox(new IterativeMergeSort(), sortAlgorithmContainer);
         
-        JCheckBox soundCheckBox = new JCheckBox("Play Sounds");
+        JCheckBox soundCheckBox = new JCheckBox("Tocar Sons");
         soundCheckBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         soundCheckBox.setBackground(BACKGROUND_COLOUR);
         soundCheckBox.setForeground(Color.WHITE);
         
         optionsContainer.add(soundCheckBox);
        
-        JButton startButton = new JButton("Begin Visual Sorter");
+        JButton startButton = new JButton("Começar Ordenação Vizual");
         startButton.addActionListener((ActionEvent e) -> {
             ArrayList<ISortAlgorithm> algorithms = new ArrayList<>();
             for (AlgorithmCheckBox cb : checkBoxes) {

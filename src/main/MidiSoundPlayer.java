@@ -29,12 +29,12 @@ public class MidiSoundPlayer {
 
         // Sons de piano são os melhores, então usamos isso.
         // As vezes não é suportado, então o default é 143.
-        Instrument[] instruments = synth.getDefaultSoundbank().getInstruments();
+        Instrument[] instrumentos = synth.getDefaultSoundbank().getInstruments();
         if (CACHED_INDEX == - 1) {
             boolean found = false;
             int index;
-            for(index = 0; index < instruments.length; index++) {
-            	Instrument i = instruments[index];
+            for(index = 0; index < instrumentos.length; index++) {
+            	Instrument i = instrumentos[index];
                 if (i.getName().equals("Electric Grand Piano")) {
                     found = true;
                     break;
@@ -46,7 +46,7 @@ public class MidiSoundPlayer {
             CACHED_INDEX = index;
         }
 
-        channel.programChange(instruments[CACHED_INDEX].getPatch().getProgram());
+        channel.programChange(instrumentos[CACHED_INDEX].getPatch().getProgram());
         
         //Seta as teclas
         keys = new ArrayList<>();

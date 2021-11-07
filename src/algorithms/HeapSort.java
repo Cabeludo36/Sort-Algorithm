@@ -9,19 +9,19 @@ public class HeapSort implements ISortAlgorithm {
     }
 
     private void toBinaryTreeArray(SortArray array,  int n, int rootIndex) {
-        int largest    = rootIndex;
-        int leftChild  = 2 * rootIndex + 1;
-        int rightChild = 2 * rootIndex + 2;
+        int maior      = rootIndex;
+        int esqChild   = 2 * rootIndex + 1;
+        int direChild  = 2 * rootIndex + 2;
 
-        if (isChildLargerThanRoot(leftChild, largest, n, array)) {
-            largest = leftChild;
+        if (isChildLargerThanRoot(esqChild, maior, n, array)) {
+            maior = esqChild;
         }
-        if (isChildLargerThanRoot(rightChild, largest, n, array)) {
-            largest = rightChild;
+        if (isChildLargerThanRoot(direChild, maior, n, array)) {
+            maior = direChild;
         }
-        if (largest != rootIndex) {
-            array.muda(rootIndex, largest, getDelay(), true);
-            toBinaryTreeArray(array, n, largest);
+        if (maior != rootIndex) {
+            array.muda(rootIndex, maior, getDelay(), true);
+            toBinaryTreeArray(array, n, maior);
         }
     }
 

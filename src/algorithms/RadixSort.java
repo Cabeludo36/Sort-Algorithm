@@ -3,9 +3,9 @@ import java.util.Arrays;
 
 public class RadixSort implements ISortAlgorithm {
 
-	private long stepDelay = 5;
+	private long passoDelay = 5;
 	private int radix;	
-	private int[] countingArr;
+	private int[] contArr;
 
 	/**
 	 * @param radix Sistema numerico que você quer trabalhar. Deve ser maior que zero
@@ -13,7 +13,7 @@ public class RadixSort implements ISortAlgorithm {
 	public RadixSort(int radix)
 	{
 		this.radix = radix;
-		countingArr = new int[radix];
+		contArr = new int[radix];
 	}	
 	
 	/**
@@ -40,21 +40,21 @@ public class RadixSort implements ISortAlgorithm {
 	@Override
 	public void runSort(SortArray array)
 	{
-		int largest = array.getValorMax();
+		int maior = array.getValorMax();
 		int[] result = new int[array.arraySize()];
 		
-		for(int exp = 1; largest/exp > 0; exp *= radix)		// na vida real se Radix fosse 2, então mudaríamos de bit.
+		for(int exp = 1; maior/exp > 0; exp *= radix)		// na vida real se Radix fosse 2, então mudaríamos de bit.
 		{
-			countingArr = countingSort(array, exp);
+			contArr = countingSort(array, exp);
 			
 			for(int i = 0; i < result.length; ++i)
 				array.updateSingle(i, result[i] = array.getValue(i), getDelay(), false);				
 			
 			for(int i = 1; i < radix; ++i)
-				countingArr[i] += countingArr[i-1];
+				contArr[i] += contArr[i-1];
 			
 			for(int i = array.arraySize() - 1; i > -1 ; --i)
-				array.updateSingle(--countingArr[(result[i]/exp)%radix], result[i], getDelay(), true);	
+				array.updateSingle(--contArr[(result[i]/exp)%radix], result[i], getDelay(), true);	
 		}		
 	}
 
@@ -67,10 +67,10 @@ public class RadixSort implements ISortAlgorithm {
 	 */
 	private int[] countingSort(SortArray arr, int exp)
 	{
-		Arrays.fill(countingArr, 0);
+		Arrays.fill(contArr, 0);
 		for(int i = 0; i < arr.arraySize(); ++i)
-			countingArr[(arr.getValue(i)/exp)%radix]++;
-		return countingArr;
+			contArr[(arr.getValue(i)/exp)%radix]++;
+		return contArr;
 	}
 
 	@Override
@@ -80,11 +80,11 @@ public class RadixSort implements ISortAlgorithm {
 
 	@Override
 	public long getDelay() {
-		return stepDelay;
+		return passoDelay;
 	}
 
 	@Override
 	public void setDelay(long delay) {
-		this.stepDelay = delay;
+		this.passoDelay = delay;
 	}
 }
