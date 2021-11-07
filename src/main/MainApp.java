@@ -9,6 +9,7 @@ import screens.MainMenuScreen;
 import screens.Screen;
 
 public class MainApp {
+    
     private final JFrame window;
     
     public static final int WIN_WIDTH = 1280;
@@ -43,10 +44,10 @@ public class MainApp {
             screens.remove(prev);
             window.remove(prev);
             if (!screens.isEmpty()) {
-            	Screen current = getCurrentScreen();
-            	window.setContentPane(current);
+            	Screen atualScreen = getCurrentScreen();
+            	window.setContentPane(atualScreen);
             	window.validate();
-                current.onOpen();
+                atualScreen.onOpen();
             }
             else {
                 window.dispose();

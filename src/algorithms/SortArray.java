@@ -21,6 +21,7 @@ import javax.swing.SpinnerNumberModel;
 import main.MidiSoundPlayer;
 
 public class SortArray extends JPanel {
+    
     public static final int DEFAULT_WIN_WIDTH = 1280;
     public static final int DEFAULT_WIN_HEIGHT = 720;
     private static final int DEFAULT_BAR_WIDTH = 5;
@@ -33,11 +34,11 @@ public class SortArray extends JPanel {
     private static final int NUM_BARS = DEFAULT_WIN_WIDTH / DEFAULT_BAR_WIDTH;
     
     private final int[] array;
-    private final int[] barColours;
+    private final int[] barCors;
     // private int spinnerValue = 0;
-    private String algorithmName = "";
-    private ISortAlgorithm algorithm;
-    private long algorithmDelay = 0;
+    private String algoritimoNome = "";
+    private ISortAlgoritimo algoritimo;
+    private long algoritimoDelay = 0;
     
     private MidiSoundPlayer player;
     private JSpinner spinner;
@@ -48,17 +49,18 @@ public class SortArray extends JPanel {
     public SortArray(boolean playSounds) {
         setBackground(Color.DARK_GRAY);
         array = new int[NUM_BARS];
-        barColours = new int[NUM_BARS];
+        barCors = new int[NUM_BARS];
+        // Cria array
         for (int i = 0; i < NUM_BARS; i++) {
             array[i] = i;
-            barColours[i] = 0;
+            barCors[i] = 0;
         }
         player = new MidiSoundPlayer(NUM_BARS);
         this.playSounds = playSounds;
         spinner = new JSpinner(new SpinnerNumberModel(1, 1, 1000, 1));
         spinner.addChangeListener((event) -> {
-            algorithmDelay = (Integer) spinner.getValue();
-            algorithm.setDelay(algorithmDelay);
+            algoritimoDelay = (Integer) spinner.getValue();
+            algoritimo.setDelay(algoritimoDelay);
         });
         add(spinner,BorderLayout.LINE_START);
     }
@@ -93,23 +95,23 @@ public class SortArray extends JPanel {
             arrayMuda++;
     }
 
-    public void muda(int firstIndex, int secondIndex, long millisecondDelay, boolean isStep) {
-        int temp = array[firstIndex];
-        array[firstIndex] = array[secondIndex];
-        array[secondIndex] = temp;
+    public void muda(int primeiroIndex, int segundoIndex, long milisegundoDelay, boolean ePasso) {
+        int temp = array[primeiroIndex];
+        array[primeiroIndex] = array[segundoIndex];
+        array[segundoIndex] = temp;
 
-        barColours[firstIndex] = 100;
-        barColours[secondIndex] = 100;
+        barCors[primeiroIndex] = 100;
+        barCors[segundoIndex] = 100;
 
-        finaliseUpdate((array[firstIndex] + array[secondIndex]) / 2, millisecondDelay, isStep);
+        finaliseUpdate((array[primeiroIndex] + array[segundoIndex]) / 2, milisegundoDelay, ePasso);
     }
 
-    public void updateSingle(int index, int value, long millisecondDelay, boolean isStep) {
-        array[index] = value;
-        barColours[index] = 100;
+    public void updateSingle(int index, int valor, long milisegundosDelay, boolean ePasso) {
+        array[index] = valor;
+        barCors[index] = 100;
        
 
-        finaliseUpdate(value, millisecondDelay, isStep);
+        finaliseUpdate(valor, milisegundosDelay, ePasso);
         repaint();
     }
 
@@ -141,7 +143,7 @@ public class SortArray extends JPanel {
 
     public void resetColours() {
         for (int i = 0; i < NUM_BARS; i++) {
-            barColours[i] = 0;
+            barCors[i] = 0;
         }
         repaint();
     }
@@ -163,8 +165,8 @@ public class SortArray extends JPanel {
 			panelGrafico.addRenderingHints(renderingHints);
 			panelGrafico.setColor(Color.WHITE);
 			panelGrafico.setFont(new Font("Monospaced", Font.BOLD, 20));
-			panelGrafico.drawString("  Algoritimo Atual: " + algorithmName, 10, 30);
-			panelGrafico.drawString("   Delay de Passos: " + algorithmDelay + "ms", 10, 55);
+			panelGrafico.drawString("  Algoritimo Atual: " + algoritimoNome, 10, 30);
+			panelGrafico.drawString("   Delay de Passos: " + algoritimoDelay + "ms", 10, 55);
 			panelGrafico.drawString(" Total de mudanças: " + arrayMuda, 10, 80);
 
 			drawBars(panelGrafico);
@@ -175,88 +177,88 @@ public class SortArray extends JPanel {
 
 	private void drawBars(Graphics2D panelGraphics)
 	{
-		int barWidth = getWidth() / NUM_BARS;
-		int bufferedImageWidth = barWidth * NUM_BARS;
-		int bufferedImageHeight = getHeight();
+		int barLargura = getWidth() / NUM_BARS;
+		int bufferedImageLargura = barLargura * NUM_BARS;
+		int bufferedImageAltura = getHeight();
         
-		if(bufferedImageHeight > 0 && bufferedImageWidth > 0) {
-			if(bufferedImageWidth < 256) {
-				bufferedImageWidth = 256;
+		if(bufferedImageAltura > 0 && bufferedImageLargura > 0) {
+			if(bufferedImageLargura < 256) {
+				bufferedImageLargura = 256;
 			}
 			
-			double maxValue = getValorMax();
+			double maxValor = getValorMax();
 		
-			BufferedImage bufferedImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight, BufferedImage.TYPE_INT_ARGB);
-			makeBufferedImageTransparent(bufferedImage);
-			Graphics2D bufferedGraphics = null;
+			BufferedImage bufferedImagem = new BufferedImage(bufferedImageLargura, bufferedImageAltura, BufferedImage.TYPE_INT_ARGB);
+			makeBufferedImageTransparent(bufferedImagem);
+			Graphics2D bufferedGraficos = null;
 			try
 			{
-				bufferedGraphics = bufferedImage.createGraphics();
+				bufferedGraficos = bufferedImagem.createGraphics();
 				
 				for (int x = 0; x < NUM_BARS; x++) {
-					double currentValue = getValue(x);
-					double percentOfMax = currentValue / maxValue;
-					double heightPercentOfPanel = percentOfMax * BAR_HEIGHT_PERCENT;
-					int height = (int) (heightPercentOfPanel * (double) getHeight());
-					int xBegin = x + (barWidth - 1) * x;
-					int yBegin = getHeight() - height;
+					double atualValue = getValue(x);
+					double percentualDoMax = atualValue / maxValor;
+					double alturaPercentualDoPanel = percentualDoMax * BAR_HEIGHT_PERCENT;
+					int altura = (int) (alturaPercentualDoPanel * (double) getHeight());
+					int xInicio = x + (barLargura - 1) * x;
+					int yInicio = getHeight() - altura;
 					
-					int val = barColours[x] * 2;
+					int val = barCors[x] * 2;
 					if (val > 190) {
-						bufferedGraphics.setColor(new Color(255 - val, 255, 255 - val));
+						bufferedGraficos.setColor(new Color(255 - val, 255, 255 - val));
 					}
 					else {
-						bufferedGraphics.setColor(new Color(255, 255 - val, 255 - val));
+						bufferedGraficos.setColor(new Color(255, 255 - val, 255 - val));
 					}
-					bufferedGraphics.fillRect(xBegin, yBegin, barWidth, height);
-					if (barColours[x] > 0) {
-						barColours[x] -= 5;
+					bufferedGraficos.fillRect(xInicio, yInicio, barLargura, altura);
+					if (barCors[x] > 0) {
+						barCors[x] -= 5;
 					}
 				}
 			}
 			finally
 			{
-				if(bufferedGraphics != null)
+				if(bufferedGraficos != null)
 				{
-					bufferedGraphics.dispose();
+					bufferedGraficos.dispose();
 				}
 			}
 			
-			panelGraphics.drawImage(bufferedImage, 0, 0, getWidth(), getHeight(), 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), null);
+			panelGraphics.drawImage(bufferedImagem, 0, 0, getWidth(), getHeight(), 0, 0, bufferedImagem.getWidth(), bufferedImagem.getHeight(), null);
 		}
 	}
 	
     private void makeBufferedImageTransparent(BufferedImage image)
     {
-    	Graphics2D bufferedGraphics = null;
+    	Graphics2D bufferedGraficos = null;
 		try
 		{
-			bufferedGraphics = image.createGraphics();
+			bufferedGraficos = image.createGraphics();
 			
-			bufferedGraphics.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR));
-			bufferedGraphics.fillRect(0, 0, image.getWidth(), image.getHeight());
-			bufferedGraphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
+			bufferedGraficos.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR));
+			bufferedGraficos.fillRect(0, 0, image.getWidth(), image.getHeight());
+			bufferedGraficos.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
 		}
 		finally
 		{
-			if(bufferedGraphics != null)
+			if(bufferedGraficos != null)
 			{
-				bufferedGraphics.dispose();
+				bufferedGraficos.dispose();
 			}
 		}
     }
     
     @Override
-    public void setName(String algorithmName) {
-        this.algorithmName = algorithmName;
+    public void setName(String algoritimoNome) {
+        this.algoritimoNome = algoritimoNome;
     }
     
-    public void setAlgorithm(ISortAlgorithm algorithm) {
-        this.algorithm = algorithm;
-        algorithmDelay = algorithm.getDelay();
-        spinner.setValue((int) algorithm.getDelay());
+    public void setAlgorithm(ISortAlgoritimo algoritimo) {
+        this.algoritimo = algoritimo;
+        algoritimoDelay = algoritimo.getDelay();
+        spinner.setValue((int) algoritimo.getDelay());
     }
     public long getAlgorithmDelay(){
-        return algorithmDelay;
+        return algoritimoDelay;
     }
 }

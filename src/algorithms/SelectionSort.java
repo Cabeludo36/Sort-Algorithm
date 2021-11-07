@@ -1,6 +1,6 @@
 package algorithms;
 
-public class SelectionSort implements ISortAlgorithm {
+public class SelectionSort implements ISortAlgoritimo {
 
     private long passoDelay = 120;
     /**

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.SwingWorker;
 
-import algorithms.ISortAlgorithm;
+import algorithms.ISortAlgoritimo;
 import algorithms.SortArray;
 import main.MainApp;
 
@@ -13,21 +13,22 @@ import main.MainApp;
  * Main class do sort visualiser GUI
  */
 public final class SortingVisualiserScreen extends Screen {
+    
     private final SortArray sortArray;
-    private final ArrayList<ISortAlgorithm> sortQueue;
+    private final ArrayList<ISortAlgoritimo> sortQueue;
 
     /**
      * Cria GUI
-     * @param algorithms Lista de algoritimos para visualização
+     * @param algoritimos Lista de algoritimos para visualização
      * @param playSounds Se vai ou não tocar sons
      * @param app Aplicação main
      */
-    public SortingVisualiserScreen(ArrayList<ISortAlgorithm> algorithms, boolean playSounds, MainApp app) {
+    public SortingVisualiserScreen(ArrayList<ISortAlgoritimo> algoritimos, boolean playSounds, MainApp app) {
         super(app);
         setLayout(new BorderLayout());
         sortArray = new SortArray(playSounds);
         add(sortArray, BorderLayout.CENTER);
-        sortQueue = algorithms;
+        sortQueue = algoritimos;
     }
     
     private void longSleep() {
@@ -55,13 +56,13 @@ public final class SortingVisualiserScreen extends Screen {
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 } 
-                for (ISortAlgorithm algorithm : sortQueue) {
+                for (ISortAlgoritimo algoritimo : sortQueue) {
                     shuffleAndWait();
                     
-                    sortArray.setName(algorithm.getName());
-                    sortArray.setAlgorithm(algorithm);
+                    sortArray.setName(algoritimo.getName());
+                    sortArray.setAlgorithm(algoritimo);
         
-                    algorithm.runSort(sortArray);
+                    algoritimo.runSort(sortArray);
                     sortArray.resetColours();
                     sortArray.highlightArray();
                     sortArray.resetColours();

@@ -2,7 +2,8 @@ package algorithms;
 
 import Util.Util;
 
-public class PancakeSort implements ISortAlgorithm {
+public class PancakeSort implements ISortAlgoritimo {
+    
     private long passoDelay = 1;
     /**
      * O Pancake Sort é o problema matemático 

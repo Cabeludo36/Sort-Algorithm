@@ -17,7 +17,7 @@ import algorithms.CountingSort;
 import algorithms.CycleSort;
 import algorithms.GnomeSort;
 import algorithms.HeapSort;
-import algorithms.ISortAlgorithm;
+import algorithms.ISortAlgoritimo;
 import algorithms.InsertionSort;
 import algorithms.IterativeMergeSort;
 import algorithms.MergeSort;
@@ -29,6 +29,7 @@ import algorithms.StoogeSort;
 import main.MainApp;
 
 public final class MainMenuScreen extends Screen {
+    
     private static final Color BACKGROUND_COLOUR = Color.DARK_GRAY;
     private final ArrayList<AlgorithmCheckBox> checkBoxes;
     
@@ -38,7 +39,7 @@ public final class MainMenuScreen extends Screen {
         setUpGUI();
     }
     
-    private void addCheckBox(ISortAlgorithm algorithm, JPanel panel) {
+    private void addCheckBox(ISortAlgoritimo algorithm, JPanel panel) {
         JCheckBox box = new JCheckBox("", true);
         box.setAlignmentX(Component.LEFT_ALIGNMENT);
         box.setBackground(BACKGROUND_COLOUR);
@@ -88,7 +89,7 @@ public final class MainMenuScreen extends Screen {
        
         JButton startButton = new JButton("Começar Ordenação Vizual");
         startButton.addActionListener((ActionEvent e) -> {
-            ArrayList<ISortAlgorithm> algorithms = new ArrayList<>();
+            ArrayList<ISortAlgoritimo> algorithms = new ArrayList<>();
             for (AlgorithmCheckBox cb : checkBoxes) {
                 if (cb.isSelected()) {
                     algorithms.add(cb.getAlgorithm());
@@ -124,10 +125,10 @@ public final class MainMenuScreen extends Screen {
     }
     
     private class AlgorithmCheckBox {
-        private final ISortAlgorithm algorithm;
+        private final ISortAlgoritimo algorithm;
         private final JCheckBox box;
         
-        public AlgorithmCheckBox(ISortAlgorithm algorithm, JCheckBox box) {
+        public AlgorithmCheckBox(ISortAlgoritimo algorithm, JCheckBox box) {
             this.algorithm = algorithm;
             this.box = box;
             this.box.setText(algorithm.getName());
@@ -142,7 +143,7 @@ public final class MainMenuScreen extends Screen {
             return box.isSelected();
         }
         
-        public ISortAlgorithm getAlgorithm() {
+        public ISortAlgoritimo getAlgorithm() {
             return algorithm;
         }
     }

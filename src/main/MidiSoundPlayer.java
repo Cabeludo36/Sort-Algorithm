@@ -7,6 +7,7 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 
 public class MidiSoundPlayer {
+    
     private final ArrayList<Integer> keys;
     private Synthesizer synth;
     private final MidiChannel channel;

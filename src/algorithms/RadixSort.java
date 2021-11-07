@@ -1,7 +1,7 @@
 package algorithms;
 import java.util.Arrays;
 
-public class RadixSort implements ISortAlgorithm {
+public class RadixSort implements ISortAlgoritimo {
 
 	private long passoDelay = 5;
 	private int radix;	

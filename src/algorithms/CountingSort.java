@@ -1,7 +1,7 @@
 package algorithms;
 
-public class CountingSort implements ISortAlgorithm
-{
+public class CountingSort implements ISortAlgoritimo {
+	
 	private long passoDelay = 2;
 	
 	@Override

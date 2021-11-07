@@ -1,6 +1,6 @@
 package algorithms;
 
-public class HeapSort implements ISortAlgorithm {
+public class HeapSort implements ISortAlgoritimo {
 
     private long passoDelay = 20;
 

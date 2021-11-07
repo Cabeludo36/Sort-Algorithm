@@ -1,6 +1,6 @@
 package algorithms;
 
-public class CycleSort implements ISortAlgorithm {
+public class CycleSort implements ISortAlgoritimo {
 
     private long passoDelay = 125;
     private class CycleResult {

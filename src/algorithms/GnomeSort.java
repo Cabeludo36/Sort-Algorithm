@@ -1,6 +1,6 @@
 package algorithms;
 
- public class GnomeSort implements ISortAlgorithm {
+ public class GnomeSort implements ISortAlgoritimo {
 
     private long stepDelay = 2;
     /**

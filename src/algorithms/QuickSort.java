@@ -1,6 +1,6 @@
 package algorithms;
 
-public class QuickSort implements ISortAlgorithm {
+public class QuickSort implements ISortAlgoritimo {
 
     private long passoDelay = 30;
     /**

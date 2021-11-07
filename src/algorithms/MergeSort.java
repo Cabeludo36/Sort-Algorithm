@@ -1,6 +1,6 @@
 package algorithms;
 
-public class MergeSort implements ISortAlgorithm {
+public class MergeSort implements ISortAlgoritimo {
 
     private long stepDelay = 20;
     /**

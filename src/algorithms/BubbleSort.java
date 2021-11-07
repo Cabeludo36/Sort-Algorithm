@@ -1,6 +1,6 @@
 package algorithms;
 
-public class BubbleSort implements ISortAlgorithm {
+public class BubbleSort implements ISortAlgoritimo {
 
     private long passoDelay = 2;
     /**

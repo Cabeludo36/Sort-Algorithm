@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import main.MainApp;
 
 public abstract class Screen extends JPanel {
+   
     protected MainApp app;
     
     public Screen(MainApp app) {

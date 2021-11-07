@@ -1,7 +1,7 @@
 package algorithms;
 
-public class IterativeMergeSort implements ISortAlgorithm
-{
+public class IterativeMergeSort implements ISortAlgoritimo {
+	
 	private long passoDelay = 5;
 	
 	/**
