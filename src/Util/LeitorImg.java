@@ -1,3 +1,4 @@
+package Util;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.awt.image.BufferedImage;
@@ -21,6 +22,7 @@ public class LeitorImg {
                 }
             }
         };
+        
         //cria filtro para imgs .png
         filtradorPNG = new FilenameFilter() {
             public boolean accept(File dir, String name) {
