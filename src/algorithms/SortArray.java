@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import Util.LeitorImg;
 import main.MidiSoundPlayer;
 
 public class SortArray extends JPanel {
@@ -25,13 +27,17 @@ public class SortArray extends JPanel {
     public static final int DEFAULT_WIN_WIDTH = 1280;
     public static final int DEFAULT_WIN_HEIGHT = 720;
     private static final int DEFAULT_BAR_WIDTH = 5;
+    LeitorImg li = new LeitorImg("img");
+    String[] imgNomes = li.caminhoDiretorio.list(li.filtradorJPG);
     /**
      * NOTE(BRENO): Esta é a porcentagem do painel que as barras irão consumir.
      * NOTE       | Com base nAs 256 barras originais, cada uma tendo 2x sua altura
      * NOTE       | e altura da janela de 720px ou 512/720
      */
     private static final double BAR_HEIGHT_PERCENT = 512.0/720.0;
-    private static final int NUM_BARS = DEFAULT_WIN_WIDTH / DEFAULT_BAR_WIDTH;
+    // para criação do array sem as imagens
+    //private static final int NUM_BARS = DEFAULT_WIN_WIDTH / DEFAULT_BAR_WIDTH;
+    private final int NUM_BARS = imgNomes.length;
     
     private final int[] array;
     private final int[] barCors;
@@ -47,14 +53,26 @@ public class SortArray extends JPanel {
     private int arrayMuda = 0; // * Número de mudanças no array que o algoritmo atual realizou até agora
 
     public SortArray(boolean playSounds) {
+        
         setBackground(Color.DARK_GRAY);
         array = new int[NUM_BARS];
         barCors = new int[NUM_BARS];
         // Cria array
         for (int i = 0; i < NUM_BARS; i++) {
-            array[i] = i;
+            try {
+                array[i] = li.leVerde(imgNomes[i]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             barCors[i] = 0;
         }
+        /* 
+        // cria array sem as imagens
+        for (int i = 0; i < NUM_BARS; i++) {
+            array[i] = i;
+            barColours[i] = 0;
+        }
+         */
         player = new MidiSoundPlayer(NUM_BARS);
         this.playSounds = playSounds;
         spinner = new JSpinner(new SpinnerNumberModel(1, 1, 1000, 1));

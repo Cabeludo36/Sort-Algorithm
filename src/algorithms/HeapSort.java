@@ -4,7 +4,7 @@ public class HeapSort implements ISortAlgoritimo {
 
     private long passoDelay = 20;
 
-    private boolean isChildLargerThanRoot(int filho, int maior, int n, SortArray array) {
+    private boolean filhoMaiorQRoot(int filho, int maior, int n, SortArray array) {
         return filho < n && array.getValue(filho) > array.getValue(maior);
     }
 
@@ -13,10 +13,10 @@ public class HeapSort implements ISortAlgoritimo {
         int esqChild   = 2 * rootIndex + 1;
         int direChild  = 2 * rootIndex + 2;
 
-        if (isChildLargerThanRoot(esqChild, maior, n, array)) {
+        if (filhoMaiorQRoot(esqChild, maior, n, array)) {
             maior = esqChild;
         }
-        if (isChildLargerThanRoot(direChild, maior, n, array)) {
+        if (filhoMaiorQRoot(direChild, maior, n, array)) {
             maior = direChild;
         }
         if (maior != rootIndex) {

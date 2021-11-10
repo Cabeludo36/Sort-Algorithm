@@ -12,7 +12,7 @@ public class MidiSoundPlayer {
     private Synthesizer synth;
     private final MidiChannel channel;
     
-    private final int inputValueMaximum;
+    private final int valorInputMax;
     private static int CACHED_INDEX = -1;
 
     public MidiSoundPlayer(int maxValue) {
@@ -22,7 +22,7 @@ public class MidiSoundPlayer {
         } catch (MidiUnavailableException ex) {
             ex.printStackTrace();
         }
-        inputValueMaximum = maxValue;
+        valorInputMax = maxValue;
         
         
         // seta canal midi
@@ -65,7 +65,7 @@ public class MidiSoundPlayer {
     }
     
     private int convertToMajor(int v) {
-        float n = ((float)v / (float)inputValueMaximum);
+        float n = ((float)v / (float)valorInputMax);
         int index = (int)(n * (float)keys.size());
         index = Math.max(1, Math.min(107, index));
         return keys.get(index);

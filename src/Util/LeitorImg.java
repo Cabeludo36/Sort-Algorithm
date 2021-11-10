@@ -1,15 +1,19 @@
 package Util;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import java.awt.image.BufferedImage;
+import java.awt.Color;
 
 public class LeitorImg {
-    int largura, altura;
-    File f, caminhoDiretorio;
-    BufferedImage img = null;
-    FilenameFilter filtradorJPG, filtradorPNG;
+    public File caminhoDiretorio;
+    public FilenameFilter filtradorJPG;
+    public FilenameFilter filtradorPNG;
 
-    LeitorImg(String diretorio) {
+    public LeitorImg(String diretorio) {
         caminhoDiretorio = new File(diretorio);
         //cria filtro para imgs .jpg
         filtradorJPG = new FilenameFilter() {
@@ -34,5 +38,29 @@ public class LeitorImg {
                 }
             }
         };
+    }
+
+    public int leVerde(String nomeImg) throws IOException {
+        File f = new File(caminhoDiretorio+"\\"+nomeImg);
+        BufferedImage img = ImageIO.read(f);
+        int count = 0;
+        for (int y = 0; y < img.getHeight(); y++) {
+            for (int x = 0; x < img.getWidth(); x++) {
+               //Retrieving contents of a pixel
+               int pixel = img.getRGB(x,y);
+               //Creating a Color object from pixel value
+               Color color = new Color(pixel, true);
+               //Retrieving the R G B values
+               int r = color.getRed();
+               int g = color.getGreen();
+               int b = color.getBlue();
+
+               if (g - 20 > r && g - 20 > b) {
+                   count++;
+               }
+            }
+        }
+        System.out.println(count);
+        return count;
     }
 }
