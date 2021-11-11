@@ -26,6 +26,7 @@ public class SortArray extends JPanel {
     
     public static final int DEFAULT_WIN_WIDTH = 1280;
     public static final int DEFAULT_WIN_HEIGHT = 720;
+    // tse sem imagens
     private static final int DEFAULT_BAR_WIDTH = 5;
     LeitorImg li = new LeitorImg("img");
     String[] imgNomes = li.caminhoDiretorio.list(li.filtradorJPG);
@@ -59,28 +60,24 @@ public class SortArray extends JPanel {
         barCors = new int[NUM_BARS];
         // Cria array
         for (int i = 0; i < NUM_BARS; i++) {
-            try {
-                array[i] = li.leVerde(imgNomes[i]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            array[i] = li.leVerde(imgNomes[i]);
             barCors[i] = 0;
         }
-        /* 
+        
         // cria array sem as imagens
-        for (int i = 0; i < NUM_BARS; i++) {
+        /* for (int i = 0; i < NUM_BARS; i++) {
             array[i] = i;
-            barColours[i] = 0;
-        }
-         */
-        player = new MidiSoundPlayer(NUM_BARS);
+            barCors[i] = 0;
+        } */
+        
+        player = new MidiSoundPlayer(2147483647);
         this.playSounds = playSounds;
         spinner = new JSpinner(new SpinnerNumberModel(1, 1, 1000, 1));
         spinner.addChangeListener((event) -> {
             algoritimoDelay = (Integer) spinner.getValue();
             algoritimo.setDelay(algoritimoDelay);
         });
-        add(spinner,BorderLayout.LINE_START);
+        add(spinner, BorderLayout.LINE_START);
     }
 
     public int arraySize() {
@@ -99,7 +96,7 @@ public class SortArray extends JPanel {
     	return Arrays.stream(array).max().orElse(Integer.MIN_VALUE);
     }
     
-    private void finaliseUpdate(int value,  long millisecondDelay, boolean isStep) {
+    private void finaliseUpdate(int value, long millisecondDelay, boolean isStep) {
         repaint();
         try {
             Thread.sleep(millisecondDelay);
