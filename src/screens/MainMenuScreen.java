@@ -95,7 +95,7 @@ public final class MainMenuScreen extends Screen {
                     algorithms.add(cb.getAlgorithm());
                 }
             }
-             app.pushScreen(
+            app.pushScreen(
                 new SortingVisualiserScreen(
                             algorithms, 
                             soundCheckBox.isSelected(), 

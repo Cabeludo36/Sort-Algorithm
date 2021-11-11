@@ -40,17 +40,22 @@ public class LeitorImg {
         };
     }
 
-    public int leVerde(String nomeImg) throws IOException {
+    public int leVerde(String nomeImg) {
         File f = new File(caminhoDiretorio+"\\"+nomeImg);
-        BufferedImage img = ImageIO.read(f);
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         int count = 0;
         for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
-               //Retrieving contents of a pixel
+               //pega cor de cada pixel
                int pixel = img.getRGB(x,y);
-               //Creating a Color object from pixel value
+               //cria um obj Color
                Color color = new Color(pixel, true);
-               //Retrieving the R G B values
+               //separa em R G B
                int r = color.getRed();
                int g = color.getGreen();
                int b = color.getBlue();
@@ -60,7 +65,6 @@ public class LeitorImg {
                }
             }
         }
-        System.out.println(count);
         return count;
     }
 }
