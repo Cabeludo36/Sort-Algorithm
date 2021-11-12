@@ -9,7 +9,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class SortArray extends JPanel {
     public static final int DEFAULT_WIN_WIDTH = 1280;
     public static final int DEFAULT_WIN_HEIGHT = 720;
     // tse sem imagens
-    private static final int DEFAULT_BAR_WIDTH = 5;
+    //private static final int DEFAULT_BAR_WIDTH = 5;
     LeitorImg li = new LeitorImg("img");
     String[] imgNomes = li.caminhoDiretorio.list(li.filtradorJPG);
     /**
