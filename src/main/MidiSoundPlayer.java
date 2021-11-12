@@ -28,7 +28,8 @@ public class MidiSoundPlayer {
         // seta canal midi
         channel = synth.getChannels()[0];
 
-        // Sons de piano são os melhores, então usamos isso.
+        // Sons de piano são os melhorespara esse tipo de coisa, 
+        // então usamos isso.
         // As vezes não é suportado, então o default é 143.
         Instrument[] instrumentos = synth.getDefaultSoundbank().getInstruments();
         if (CACHED_INDEX == - 1) {
