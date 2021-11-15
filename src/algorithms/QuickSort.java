@@ -26,7 +26,7 @@ public class QuickSort implements ISortAlgoritimo {
     }
 
     /**
-     * This is the core of the algorithm quick sort.
+     * Esse é o ponto central do Quick Sort
      *
      * @param array Array a ser cortado e mesclado
      * @param lowIndex Index a esquerda do array 

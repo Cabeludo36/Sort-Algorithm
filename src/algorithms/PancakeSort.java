@@ -16,7 +16,7 @@ public class PancakeSort implements ISortAlgoritimo {
      * 
      * @param array Arrat a ser ordenado
      */
-    private void flip(SortArray array, int i) {
+    private void vira(SortArray array, int i) {
         for (int j = 0; j < i; j++, i--) {
             array.muda(i, j, getDelay(), true);
         }
@@ -27,8 +27,8 @@ public class PancakeSort implements ISortAlgoritimo {
         for (int i = array.arraySize(); i > 1; i--) {
             int maxValorIndex = Util.findMaxValueIndex(array, i);
             if (maxValorIndex != i - 1) {
-                flip(array, maxValorIndex);
-                flip(array, i - 1);
+                vira(array, maxValorIndex);
+                vira(array, i - 1);
             }
         }
     }

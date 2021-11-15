@@ -13,8 +13,7 @@ public class IterativeMergeSort implements ISortAlgoritimo {
 	 * @see SortArray
 	 */
 	@Override
-	public void runSort(SortArray array) 
-	{
+	public void runSort(SortArray array) {
 		for(int exp = 1; exp < array.arraySize(); exp <<= 1)
 			for(int k = 0, j = exp+exp, s = array.arraySize()-exp; k<s; k+=j)
 				merge(array, k, exp);
@@ -28,8 +27,7 @@ public class IterativeMergeSort implements ISortAlgoritimo {
 	 * @param fim Posição final da subsequência (não inclusiva)
 	 * @return Subsequencia do array
 	 */
-	private int[] getSubArray(SortArray array, int inicio, int fim)
-	{
+	private int[] getSubArray(SortArray array, int inicio, int fim) {
 		int size = fim - inicio;
 		int arr[] = new int[size];
 		for (int i = 0; i < size; i++) 
@@ -43,23 +41,22 @@ public class IterativeMergeSort implements ISortAlgoritimo {
 	 * @param inicio Começo da subsequência
 	 * @param exp Expoente atual, e tamanho da subsequência
 	 */
-	private void merge(SortArray arr, int inicio, int exp)
-	{
+	private void merge(SortArray arr, int inicio, int exp) {
 		int s = inicio;
 		int m = inicio + exp;
-		int end = (arr.arraySize() < m+exp) ? arr.arraySize() : m + exp;				
-		int[] leftArr = getSubArray(arr, s, m);
-		int[] rightArr = getSubArray(arr, m, end);
+		int fim = (arr.arraySize() < m+exp) ? arr.arraySize() : m + exp;				
+		int[] esqArr = getSubArray(arr, s, m);
+		int[] direArr = getSubArray(arr, m, fim);
 		int i = 0, j = 0;
-		while(i < leftArr.length && j < rightArr.length)
-			if(leftArr[i] <= rightArr[j])
-				arr.updateSingle(inicio++, leftArr[i++], getDelay(), true);
+		while(i < esqArr.length && j < direArr.length)
+			if(esqArr[i] <= direArr[j])
+				arr.updateSingle(inicio++, esqArr[i++], getDelay(), true);
 			else
-				arr.updateSingle(inicio++, rightArr[j++], getDelay(), true);
-		while (i < leftArr.length)
-			arr.updateSingle(inicio++, leftArr[i++], getDelay(), true);
-		while (j < leftArr.length)
-			arr.updateSingle(inicio++, rightArr[j++], getDelay(), true);		
+				arr.updateSingle(inicio++, direArr[j++], getDelay(), true);
+		while (i < esqArr.length)
+			arr.updateSingle(inicio++, esqArr[i++], getDelay(), true);
+		while (j < esqArr.length)
+			arr.updateSingle(inicio++, direArr[j++], getDelay(), true);		
 	}	
 
 	@Override

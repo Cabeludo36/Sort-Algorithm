@@ -29,12 +29,10 @@ public class CountingSort implements ISortAlgoritimo {
 	 * @param array Array a ser ordenado
 	 */	
 	@Override
-	public void runSort(SortArray array)
-	{
+	public void runSort(SortArray array) {
 		int[] result = new int[array.arraySize()];
 		int[] cont = new int[array.getValorMax()+1];		
-		for(int i = 0; i < result.length; ++i)
-		{	
+		for(int i = 0; i < result.length; ++i) {	
 			array.updateSingle(i, result[i] = array.getValue(i), getDelay(), false);		
 			++cont[array.getValue(i)];
 		}

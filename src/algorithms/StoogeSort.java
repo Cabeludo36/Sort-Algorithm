@@ -3,6 +3,7 @@ package algorithms;
 public class StoogeSort implements ISortAlgoritimo {
 
     private long passoDelay = 5;
+    
     public void stoogeSort(SortArray array, int lowIndex, int highIndex) {
         if (lowIndex >= highIndex) {
             return;

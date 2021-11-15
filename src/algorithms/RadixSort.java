@@ -38,14 +38,13 @@ public class RadixSort implements ISortAlgoritimo {
 	 * @see SortArray
 	 */	
 	@Override
-	public void runSort(SortArray array)
-	{
+	public void runSort(SortArray array) {
 		int maior = array.getValorMax();
 		int[] result = new int[array.arraySize()];
-		
-		for(int exp = 1; maior/exp > 0; exp *= radix)		// na vida real se Radix fosse 2, então mudaríamos de bit.
-		{
-			contArr = countingSort(array, exp);
+
+		// na vida real se Radix fosse 2, então mudaríamos de bit.
+		for(int exp = 1; maior/exp > 0; exp *= radix) {
+			contArr = contSort(array, exp);
 			
 			for(int i = 0; i < result.length; ++i)
 				array.updateSingle(i, result[i] = array.getValue(i), getDelay(), false);				
@@ -65,8 +64,7 @@ public class RadixSort implements ISortAlgoritimo {
 	 * @param exp Exponente atual
 	 * @return Um array de contagem que fornece novos índices para todos os valores
 	 */
-	private int[] countingSort(SortArray arr, int exp)
-	{
+	private int[] contSort(SortArray arr, int exp) {
 		Arrays.fill(contArr, 0);
 		for(int i = 0; i < arr.arraySize(); ++i)
 			contArr[(arr.getValue(i)/exp)%radix]++;

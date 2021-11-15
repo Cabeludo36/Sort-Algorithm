@@ -7,6 +7,7 @@ public class BubbleSort implements ISortAlgoritimo {
      * Este método implementa o algoritmo de classificação de bolhas,
      * consulte <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble_sort</a> 
      * para entender mais.
+     * 
      * Pega um objeto SortArray chamado array e classifica seus elementos
      *  de acordo com a teoria matemática da ordem "menor que", consulte 
      * <a href="https://en.wikipedia.org/wiki/Order_theory">Order_theory</a> 
